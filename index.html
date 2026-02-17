@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Late Valentine's Day!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Indie+Flower&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS SETUP --- */
+        :root {
+            --primary: #ff4d6d;
+            --secondary: #ff8fa3;
+            --bg-color: #fff0f3;
+            --paper: #fff;
+            --text: #590d22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(#ffccd5 15%, transparent 16%), radial-gradient(#ffccd5 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            color: var(--text);
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        /* --- BACKGROUND ANIMATION (FLOATING HEARTS) --- */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            background-color: var(--secondary);
+            display: inline-block;
+            height: 30px;
+            width: 30px;
+            margin: 0 10px;
+            transform: rotate(-45deg);
+            animation: float 6s linear infinite;
+            opacity: 0.6;
+        }
+
+        .heart::before, .heart::after {
+            content: "";
+            position: absolute;
+            background-color: var(--secondary);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+        }
+
+        .heart::before { top: -15px; left: 0; }
+        .heart::after { top: 0; left: 15px; }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(-45deg) scale(0.8); opacity: 1; }
+            100% { transform: translateY(-120vh) rotate(-45deg) scale(1.2); opacity: 0; }
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: center;
+            z-index: 10;
+        }
+
+        /* --- HEADER --- */
+        h1 {
+            font-family: 'Fredoka One', cursive;
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 0px #fff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-20px);}
+            60% {transform: translateY(-10px);}
+        }
+
+        /* --- GALLERY SECTION (PHOTO & VIDEO) --- */
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .polaroid {
+            background: var(--paper);
+            padding: 10px 10px 25px 10px;
+            box-shadow: 5px 5px 15px rgba(0,0,0,0.1);
+            transform: rotate(-3deg);
+            transition: transform 0.3s ease;
+            width: 45%;
+            min-width: 200px;
+            border-radius: 4px;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 5;
+        }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(3deg);
+        }
+
+        .polaroid img, .polaroid video {
+            width: 100%;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            aspect-ratio: 1/1; /* Membuat kotak */
+            object-fit: cover;
+        }
+
+        .caption {
+            font-family: 'Indie Flower', cursive;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        /* --- LETTER SECTION --- */
+        .letter-box {
+            background: var(--paper);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            position: relative;
+            margin-top: 20px;
+            border: 2px dashed var(--secondary);
+        }
+
+        .letter-box::before {
+            content: "💌";
+            font-size: 3rem;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-color);
+            border-radius: 50%;
+            padding: 5px;
+        }
+
+        .letter-content {
+            font-family: 'Indie Flower', cursive;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #ffd1dc 0%, #ffd1dc 100%);
+            background-repeat: no-repeat;
+            background-size: 100% 30%;
+            background-position: 0 88%;
+            font-weight: bold;
+        }
+
+        /* --- MUSIC BUTTON --- */
+        .music-control {
+            margin-top: 30px;
+            margin-bottom: 50px;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #d63352;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="hearts-container" id="hearts">
+        </div>
+
+    <div class="container">
+        <h1>Happy Late Valentine's Day! ❤️</h1>
+        <p style="font-size: 1.1rem;">Untuk orang spesialku,</p>
+
+        <div class="gallery">
+            
+            <div class="polaroid">
+                <img src="foto.jpg" alt="Our Photo">
+                <div class="caption">Us Together ✨</div>
+            </div>
+
+            <div class="polaroid">
+                <video controls>
+                    <source src="video.mp4" type="video/mp4">
+                    Browser kamu ga support video :(
+                </video>
+                <div class="caption">NabJem🎥</div>
+            </div>
+
+        </div>
+
+            <div class="music-control">
+            <audio id="bgMusic" loop>
+                <source src="lagu.mp3" type="audio/mpeg">
+            </audio>
+            <button onclick="toggleMusic()">🎵 Play Our Song</button>
+        </div>
+
+        <div class="letter-box">
+            <div class="letter-content">
+                Dear <span class="highlight">Mulmul</span>,
+
+                happy valentine’s day sayang 🤍
+                 <br><br>
+                 aku nggak nyangka kita bisa sampai di titik ini. dari stranger 
+                 ngobrol biasa sampai sekarang jadi orang yang paling aku tunggu kabarnya tiap hari.
+                 <br><br>
+                makasih ya udah sabar sama aku, sama mood aku, sama semua kurang lebihnya aku. makasih untuk semua hal yang udah km kasih ke aku, waktu, tenaga, perhatian, semuanya.... 
+                aku kayanya ga akan bisa pernah se happy ini kalau bukan sama kamu. terimakasih untuk selalu ada, denger cerita cerita random aku, terimakasih sudah bikin aku bisa ngerasain dicintai segininya.
+                 <br><br>
+                aku tau hubungan kita masih baru, tapi kayak yang udah sering aku dan kamu bilang, rasanya cuma kamu yang mengenal aku sedalam ini.
+                 <br><br>
+                aku minta maaf ya sayang kalau aku masih kurang, kurang care sama kau, atau apa pun itu.
+                 <br><br>
+                dan kalau kamu bilang mau terus milih aku setiap hari dari surat yang kamu kasih kemarin, aku juga mau. bukan cuma pas semuanya gampang, tapi juga pas lagi capek, lagi berantakan, lagi nggak sempurna. kita grow bareng ya sayang.
+                 <br><br>
+                valentine pertama kita ya? semoga bukan cuma yang pertama, tapi awal dari banyak hal manis yang bakal kita lewatin bareng.
+                 <br><br>
+                love u tomatttt 🍅🍅🍅🍅🍅
+                 <br><br>
+                With love,
+                <b>Nabnab</b>
+            </div>
+
+
+    </div>
+
+    <script>
+        // Membuat Hati Melayang Secara Acak
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            const heartCount = 15; // Jumlah hati
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = Math.random() * 3 + 4 + "s"; // 4-7 detik
+                heart.style.opacity = Math.random();
+                heart.style.fontSize = Math.random() * 20 + 20 + 'px';
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Fungsi Play/Pause Musik
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            const btn = document.querySelector('button');
+
+            if (music.paused) {
+                music.play();
+                btn.innerHTML = "⏸️ Pause Song";
+            } else {
+                music.pause();
+                btn.innerHTML = "🎵 Play Our Song";
+            }
+        }
+
+        // Jalankan animasi hati saat load
+        window.onload = createHearts;
+    </script>
+</body>
+</html>
